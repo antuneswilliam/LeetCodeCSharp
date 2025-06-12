@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphBfsOo", "GraphBfsOo\Gr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDfsOo", "GraphDfsOo\GraphDfsOo.csproj", "{B6F81D62-EAA0-4561-AD2A-20CA72BB58DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvertBinaryTree", "InvertBinaryTree\InvertBinaryTree.csproj", "{8D4D8514-3C92-44C7-8932-A379BDFAB71C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{B6F81D62-EAA0-4561-AD2A-20CA72BB58DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6F81D62-EAA0-4561-AD2A-20CA72BB58DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6F81D62-EAA0-4561-AD2A-20CA72BB58DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4D8514-3C92-44C7-8932-A379BDFAB71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4D8514-3C92-44C7-8932-A379BDFAB71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4D8514-3C92-44C7-8932-A379BDFAB71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4D8514-3C92-44C7-8932-A379BDFAB71C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
