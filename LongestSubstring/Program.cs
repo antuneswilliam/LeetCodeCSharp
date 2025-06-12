@@ -42,7 +42,7 @@ public class Solution
         // replace bad characters with a special character
         foreach (var c in badChars)
         {
-            s = s.Replace(c.ToString(), ";");
+            s = s.Replace(c, ';');
         }
 
         // split the string by the special character
@@ -54,7 +54,7 @@ public class Solution
         foreach (var result in results)
         {
             // recursively find the longest substring for each segment
-            int currentSegmentMax = LongestSubstring(result, k);
+            var currentSegmentMax = LongestSubstring(result, k);
 
             // determine the maximum length of the substring
             maxLength = Math.Max(maxLength, currentSegmentMax);
