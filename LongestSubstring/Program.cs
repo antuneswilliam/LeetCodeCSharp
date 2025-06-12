@@ -2,18 +2,7 @@
 
 Console.WriteLine(solution.LongestSubstring("aaabb", 3)); // Expected = 3
 Console.WriteLine(solution.LongestSubstring("ababbc", 2)); // Expected = 5
-
-class Text
-{
-    public Text(int start, int end)
-    {
-        Start = start;
-        End = end;
-    }
-
-    public int Start { get; set; }
-    public int End { get; set; }
-}
+Console.WriteLine(solution.LongestSubstring("ababacb", 3)); // Expected = 0
 
 public class Solution
 {
@@ -24,66 +13,51 @@ public class Solution
             return 0;
         }
 
-        int maxLength = 0;
-        Queue<Text> queue = new Queue<Text>();
-        queue.Enqueue(new Text(0, s.Length - 1)); // Store (start, end) indices of substrings to process
+        // Count character frequencies
+        var dic = new Dictionary<char, int>();
 
-        while (queue.Any())
+        foreach (var c in s)
         {
-            Text currentRange = queue.Dequeue();
-            int start = currentRange.Start;
-            int end = currentRange.End;
-
-            // If the current substring is too short, skip it
-            if (end - start + 1 < k)
-            {
-                continue;
-            }
-
-            // Count character frequencies for the current substring
-            int[] charCounts = new int[26]; // For lowercase English letters
-            for (int i = start; i <= end; i++)
-            {
-                charCounts[s[i] - 'a']++;
-            }
-
-            // Find the first character that appears less than k times in this substring
-            int splitIndex = -1;
-            for (int i = start; i <= end; i++)
-            {
-                if (charCounts[s[i] - 'a'] < k)
-                {
-                    splitIndex = i;
-                    break;
-                }
-            }
-
-            if (splitIndex == -1)
-            {
-                // All characters in this substring appear at least k times
-                maxLength = Math.Max(maxLength, end - start + 1);
-            }
+            if (dic.ContainsKey(c))
+                dic[c]++;
             else
+                dic.Add(c, 1);
+        }
+
+        // Register bad characters, characters that appear less than k times
+        var badChars = new List<char>();
+
+        foreach (var key in dic.Keys)
+        {
+            if (dic[key] < k)
             {
-                // Found a splitting character, divide and add subproblems to the queue
-
-                // Add the left part
-                if (splitIndex - 1 >= start)
-                {
-                    queue.Enqueue(new Text(start, splitIndex - 1));
-                }
-
-                // Add the right part (skip consecutive splitting characters)
-                int nextStart = splitIndex + 1;
-                while (nextStart <= end && charCounts[s[nextStart] - 'a'] < k)
-                {
-                    nextStart++;
-                }
-                if (nextStart <= end)
-                {
-                    queue.Enqueue(new Text(nextStart, end));
-                }
+                badChars.Add(key);
             }
+        }
+
+        // if no bad characters, return the length of the string
+        if (badChars.Count == 0)
+            return s.Length;
+
+        // replace bad characters with a special character
+        foreach (var c in badChars)
+        {
+            s = s.Replace(c.ToString(), ";");
+        }
+
+        // split the string by the special character
+        var results = s.Split(";");
+
+        var maxLength = 0;
+
+        // find the longest substring for each segment
+        foreach (var result in results)
+        {
+            // recursively find the longest substring for each segment
+            int currentSegmentMax = LongestSubstring(result, k);
+
+            // determine the maximum length of the substring
+            maxLength = Math.Max(maxLength, currentSegmentMax);
         }
 
         return maxLength;
